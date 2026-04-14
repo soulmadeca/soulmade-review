@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
@@ -12,111 +12,449 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .logo{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--latte);margin-bottom:20px}
 h1{font-size:22px;font-weight:700;line-height:1.35;margin-bottom:8px}
-.subtitle{font-size:14px;color:#7a6a5a;line-height:1.6;margin-bottom:28px}
+.sub{font-size:14px;color:#7a6a5a;line-height:1.6;margin-bottom:28px}
 .stars-wrap{display:flex;justify-content:center;gap:10px;margin-bottom:10px}
 .star-btn{font-size:44px;cursor:pointer;color:#ddd;background:none;border:none;padding:0;line-height:1;transition:color .15s,transform .15s;-webkit-tap-highlight-color:transparent}
 .star-btn.lit{color:var(--star)}
 .star-btn:active{transform:scale(1.2)}
-.star-label{font-size:13px;color:#a09080;min-height:20px;margin-bottom:24px}
+.star-lbl{font-size:13px;color:#a09080;min-height:20px;margin-bottom:24px}
+.kw-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px}
+.kw-chip{padding:8px 14px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--latte);background:transparent;color:var(--espresso);transition:all .15s;-webkit-tap-highlight-color:transparent;line-height:1.3}
+.kw-chip.sel{background:var(--espresso);color:#fff;border-color:var(--espresso)}
+.kw-hint{font-size:12px;color:#a09080;margin-bottom:20px}
 .btn{display:block;width:100%;padding:15px;border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:opacity .2s,transform .15s;text-decoration:none;margin-bottom:10px}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--espresso);color:#fff}
+.btn-dark{background:var(--espresso);color:#fff}
 .btn-google{background:#4285F4;color:#fff}
-.btn-outline{background:transparent;color:var(--espresso);border:1.5px solid var(--latte)}
 .btn-sage{background:var(--sage);color:#fff}
-.btn-disabled{background:#e0d8d0;color:#aaa;cursor:not-allowed;pointer-events:none}
-.review-box{background:var(--foam);border-radius:12px;padding:16px;text-align:left;font-size:14px;line-height:1.7;color:#4a3828;margin-bottom:18px;position:relative;border:1px solid #e8ddd0}
-.copy-tag{position:absolute;top:10px;right:10px;font-size:11px;background:var(--latte);color:#fff;padding:3px 9px;border-radius:20px;cursor:pointer;font-weight:600;transition:background .2s}
-.copy-tag.copied{background:var(--sage)}
-.hint{font-size:12px;color:#a09080;margin-bottom:18px;line-height:1.5}
-textarea{width:100%;border:1.5px solid var(--foam);border-radius:12px;padding:14px;font-size:14px;font-family:inherit;color:var(--espresso);background:var(--foam);resize:none;outline:none;min-height:130px;margin-bottom:18px;line-height:1.6;transition:border-color .2s}
+.btn-lock{background:#e0d8d0;color:#aaa;cursor:not-allowed;pointer-events:none}
+.rv-box{background:var(--foam);border-radius:12px;padding:16px 14px;text-align:left;font-size:13px;line-height:1.7;color:#4a3828;margin-bottom:16px;position:relative;border:1px solid #e8ddd0;font-style:italic}
+.cp-tag{position:absolute;top:10px;right:10px;font-size:11px;background:var(--latte);color:#fff;padding:3px 9px;border-radius:20px;cursor:pointer;font-weight:600;transition:background .2s}
+.cp-tag.done{background:var(--sage)}
+.hint{font-size:12px;color:#a09080;margin-bottom:16px;line-height:1.5}
+.cd-wrap{margin-bottom:14px}
+.cd-bg{height:4px;background:#e8ddd0;border-radius:4px;overflow:hidden;margin-bottom:8px}
+.cd-bar{height:4px;background:var(--sage);border-radius:4px;transition:width 1s linear}
+.cd-txt{font-size:12px;color:#a09080}
+textarea{width:100%;border:1.5px solid var(--foam);border-radius:12px;padding:14px;font-size:14px;font-family:inherit;color:var(--espresso);background:var(--foam);resize:none;outline:none;min-height:120px;margin-bottom:18px;line-height:1.6;transition:border-color .2s}
 textarea:focus{border-color:var(--latte)}
 textarea::placeholder{color:#b0a090}
-.redeem-wrap{background:var(--foam);border-radius:14px;padding:22px 18px;margin-bottom:22px}
-.redeem-emoji{font-size:48px;margin-bottom:10px}
-.redeem-title{font-size:20px;font-weight:700;margin-bottom:6px}
-.redeem-sub{font-size:13px;color:#7a6a5a}
-.redeem-badge{display:inline-block;background:var(--star);color:var(--espresso);font-weight:700;font-size:13px;padding:6px 16px;border-radius:20px;margin-top:12px;letter-spacing:.04em}
-.staff-note{font-size:11px;color:#a09080;margin-top:14px;line-height:1.5}
+.rdm-wrap{background:var(--foam);border-radius:14px;padding:20px 16px;margin-bottom:18px}
+.rdm-emoji{font-size:42px;margin-bottom:8px}
+.rdm-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.rdm-sub{font-size:13px;color:#7a6a5a;margin-bottom:12px}
+.rdm-rv{background:#fff;border-radius:10px;padding:12px 14px;font-size:12px;font-style:italic;color:#4a3828;line-height:1.6;text-align:left;border:1px solid #e8ddd0;margin-bottom:12px}
+.rdm-badge{display:inline-block;background:var(--star);color:var(--espresso);font-weight:700;font-size:13px;padding:5px 14px;border-radius:20px;letter-spacing:.04em}
+.expire-row{font-size:11px;color:#a09080;margin-top:10px}
+.expire-live{font-weight:700;color:var(--sage)}
+.expire-live.urgent{color:var(--rust)}
+.staff-note{font-size:11px;color:#a09080;margin-top:12px;line-height:1.5}
+.chip-score{display:inline-flex;align-items:center;gap:4px;background:var(--star);color:var(--espresso);font-weight:700;font-size:13px;padding:5px 12px;border-radius:20px;margin-bottom:18px}
 .screen{display:none}
 .screen.active{display:block}
-.divider{display:flex;align-items:center;gap:10px;margin:14px 0;color:#c0b0a0;font-size:12px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--foam)}
-.back-link{font-size:12px;color:var(--latte);cursor:pointer;margin-top:14px;display:inline-block}
-.score-chip{display:inline-flex;align-items:center;gap:4px;background:var(--star);color:var(--espresso);font-weight:700;font-size:13px;padding:5px 12px;border-radius:20px;margin-bottom:18px}
+.back{font-size:12px;color:var(--latte);cursor:pointer;margin-top:14px;display:inline-block}
+.expire-box{padding:20px;text-align:center}
+.expire-box h2{font-size:18px;margin-bottom:8px;color:var(--rust)}
+.expire-box p{font-size:13px;color:#7a6a5a;line-height:1.6}
 </style>
 </head>
 <body>
 <div class="card">
+
+<!-- S1: Star rating -->
 <div id="s1" class="screen active">
-<div class="logo">Soul Made Cafe &middot; Spadina</div>
-<h1>今天感觉怎么样？</h1>
-<p class="subtitle">花 30 秒告诉我们你的体验，<br>凭本页领取<strong>黄油年糕</strong>一份 &#x1F361;</p>
-<div class="stars-wrap" id="starRow">
-<button class="star-btn" data-val="1">&#9733;</button>
-<button class="star-btn" data-val="2">&#9733;</button>
-<button class="star-btn" data-val="3">&#9733;</button>
-<button class="star-btn" data-val="4">&#9733;</button>
-<button class="star-btn" data-val="5">&#9733;</button>
+  <div class="logo">Soul Made Cafe &middot; Spadina</div>
+  <h1 id="t-s1h"></h1>
+  <p class="sub" id="t-s1p"></p>
+  <div class="stars-wrap" id="starRow">
+    <button class="star-btn" data-val="1">&#9733;</button>
+    <button class="star-btn" data-val="2">&#9733;</button>
+    <button class="star-btn" data-val="3">&#9733;</button>
+    <button class="star-btn" data-val="4">&#9733;</button>
+    <button class="star-btn" data-val="5">&#9733;</button>
+  </div>
+  <div class="star-lbl" id="sLbl"></div>
+  <button class="btn btn-dark" id="btnOK" style="display:none" onclick="onConfirm()"></button>
 </div>
-<div class="star-label" id="lbl">点击星星打分</div>
-<button class="btn btn-primary" id="btnOK" style="display:none">确认 &rarr;</button>
-</div>
+
+<!-- S2: Keyword picker -->
 <div id="s2" class="screen">
-<div class="logo">Soul Made Cafe &middot; Spadina</div>
-<div class="score-chip">&#x2B50; 5 / 5 &nbsp;&middot;&nbsp; 谢谢你！</div>
-<h1>看到你喜欢，<br>我们也超开心</h1>
-<p class="subtitle" style="margin-bottom:20px">能否把这份喜爱带到 Google？<br>复制下方文字，粘贴到评价里就好 &#x1F447;</p>
-<div class="review-box" id="rBox"><span class="copy-tag" id="cpTag" onclick="cpRv()">复制</span><span id="rvTxt"></span></div>
-<p class="hint">复制后点击下方按钮，Google 页面会自动打开，粘贴即可发布。</p>
-<button class="btn btn-google" id="gBtn">在 Google 上支持我们 &rarr;</button>
-<div class="divider">完成后</div>
-<button class="btn btn-outline" onclick="rdm()">展示给店员领取年糕 &#x1F361;</button>
-<span class="back-link" onclick="back()">&larr; 重新打分</span>
+  <div class="logo">Soul Made Cafe &middot; Spadina</div>
+  <div class="chip-score">&#x2B50; 5 / 5</div>
+  <h1 id="t-s2h"></h1>
+  <p class="kw-hint" id="t-s2p"></p>
+  <div class="kw-grid" id="kwGrid"></div>
+  <button class="btn btn-dark" id="btnGen" onclick="genReview()" style="opacity:.5"></button>
+  <br><span class="back" onclick="goBack()"></span>
 </div>
+
+<!-- S3: Review + Google + countdown -->
 <div id="s3" class="screen">
-<div class="logo">Soul Made Cafe &middot; Spadina</div>
-<div class="score-chip" id="sdChip"></div>
-<h1>抱歉没能给你<br>满分体验</h1>
-<p class="subtitle" style="margin-bottom:20px">你的建议将直达店长 Roger。<br>请告诉我们哪里可以做得更好？<br><small>（我们非常希望有机会补偿你）</small></p>
-<textarea id="fbTxt" placeholder="产品 / 服务 / 环境… 任何真实的感受都欢迎。"></textarea>
-<button class="btn btn-primary" onclick="subFb()">提交并领取年糕 &#x1F361;</button>
-<span class="back-link" onclick="back()">&larr; 重新打分</span>
+  <div class="logo">Soul Made Cafe &middot; Spadina</div>
+  <div class="chip-score">&#x2B50; 5 / 5</div>
+  <h1 id="t-s3h"></h1>
+  <p class="sub" id="t-s3p"></p>
+  <div class="rv-box" id="rBox">
+    <span class="cp-tag" id="cpTag" onclick="cpRv()"></span>
+    <span id="rvTxt"></span>
+  </div>
+  <p class="hint" id="t-s3hint"></p>
+  <button class="btn btn-google" id="gBtn" onclick="onGoogle()"></button>
+  <div class="cd-wrap" id="cdWrap" style="display:none">
+    <div class="cd-bg"><div class="cd-bar" id="cdBar" style="width:100%"></div></div>
+    <div class="cd-txt" id="cdTxt"></div>
+  </div>
+  <br><span class="back" onclick="goBack()"></span>
 </div>
+
+<!-- S4: Sad feedback -->
 <div id="s4" class="screen">
-<div class="logo">Soul Made Cafe &middot; Spadina</div>
-<div class="redeem-wrap" id="rdmWrap">
-<div class="redeem-emoji">&#x1F361;</div>
-<div class="redeem-title">感谢你的真实反馈！</div>
-<div class="redeem-sub">请将本页面展示给店员</div>
-<div class="redeem-badge">黄油年糕 &times; 1</div>
+  <div class="logo">Soul Made Cafe &middot; Spadina</div>
+  <div class="chip-score" id="sdChip"></div>
+  <h1 id="t-s4h"></h1>
+  <p class="sub" id="t-s4p"></p>
+  <textarea id="fbTxt"></textarea>
+  <button class="btn btn-dark" onclick="subFb()"></button>
+  <br><span class="back" onclick="goBack()"></span>
 </div>
-<button class="btn btn-sage" id="stfBtn" onclick="stfRdm()">[ 店员确认核销 ]</button>
-<p class="staff-note" id="stfNote">店员点击后页面锁定，请在收据上盖章或打叉。</p>
+
+<!-- S5: Redemption -->
+<div id="s5" class="screen">
+  <div class="logo">Soul Made Cafe &middot; Spadina</div>
+  <div id="rdmBody"></div>
+  <button class="btn btn-sage" id="stfBtn" onclick="stfRdm()"></button>
+  <p class="staff-note" id="stfNote"></p>
 </div>
+
 </div>
+
 <script>
-var GU="https://search.google.com/local/writereview?placeid=ChIJm_vQheU1K4gRm95CQTp9JK8";
-var EM="soulmadeca@gmail.com";
-var RV=["Soul Made is genuinely my go-to spot in this area. The coffee is well-crafted and consistent — you can tell they take it seriously. The vibe is calm and unpretentious, which I really appreciate.","Had a wonderful visit at Soul Made Spadina. The drinks are thoughtfully made and the space feels like a place to actually slow down. Staff was warm and attentive the whole time.","Love coming here when I need a proper coffee and a quiet moment. Soul Made has that rare combination of quality and atmosphere — nothing feels rushed or generic.","Every time I visit Soul Made, the experience is consistent and genuine. Great coffee, a cozy space, and you can tell the team cares about what they do.","Soul Made Spadina has become part of my regular routine. The coffee is always on point, and the space has a calm energy that is hard to find downtown Toronto."];
-var LB=["","不太满意","有些遗憾","还不错","很喜欢","太好了，爱了！"];
-var rt=0,rv="";
-var sbs=document.querySelectorAll(".star-btn"),lbl=document.getElementById("lbl"),bok=document.getElementById("btnOK");
-sbs.forEach(function(b){b.addEventListener("click",function(){rt=parseInt(b.getAttribute("data-val"));pst(rt);lbl.textContent=LB[rt];bok.style.display="block";});b.addEventListener("mouseenter",function(){pst(parseInt(b.getAttribute("data-val")));});b.addEventListener("mouseleave",function(){pst(rt);});});
-function pst(n){sbs.forEach(function(b){b.classList.toggle("lit",parseInt(b.getAttribute("data-val"))<=n);});}
-bok.addEventListener("click",function(){if(!rt)return;rt===5?shH():shS(rt);});
-function shH(){rv=RV[Math.floor(Math.random()*RV.length)];document.getElementById("rvTxt").textContent=rv;var t=document.getElementById("cpTag");t.textContent="复制";t.classList.remove("copied");go("s2");}
-function cpRv(){if(!rv)return;function ok(){var t=document.getElementById("cpTag");t.textContent="已复制 ✓";t.classList.add("copied");}if(navigator.clipboard){navigator.clipboard.writeText(rv).then(ok);}else{var e=document.createElement("textarea");e.value=rv;document.body.appendChild(e);e.select();document.execCommand("copy");document.body.removeChild(e);ok();}}
-document.getElementById("gBtn").addEventListener("click",function(){window.open(GU,"_blank");});
-function shS(sc){document.getElementById("sdChip").textContent="⭐ "+sc+" / 5";document.getElementById("fbTxt").value="";go("s3");}
-function subFb(){var tx=document.getElementById("fbTxt").value.trim();if(!tx){document.getElementById("fbTxt").style.borderColor="var(--rust)";return;}var sj=encodeURIComponent("[DT 店反馈] 评分 "+rt+"★ · "+new Date().toLocaleDateString("zh-CN"));var bd=encodeURIComponent("客人评分："+rt+" / 5\n\n意见：\n"+tx+"\n\n来源：收据扫码问卷 · "+new Date().toLocaleString("zh-CN"));window.location.href="mailto:"+EM+"?subject="+sj+"&body="+bd;setTimeout(function(){rdm();},800);}
-function rdm(){localStorage.getItem("sm_"+dk())==="1"?sRd():sFr();go("s4");}
-function sFr(){document.getElementById("rdmWrap").innerHTML='<div class="redeem-emoji">🍡</div><div class="redeem-title">感谢你的真实反馈！</div><div class="redeem-sub">请将本页面展示给店员</div><div class="redeem-badge">黄油年糕 &times; 1</div>';var b=document.getElementById("stfBtn");b.className="btn btn-sage";b.textContent="[ 店员确认核销 ]";b.style.pointerEvents="";document.getElementById("stfNote").textContent="店员点击后页面锁定，请在收据上盖章或打叉。";}
-function sRd(){document.getElementById("rdmWrap").innerHTML='<div class="redeem-emoji">✅</div><div class="redeem-title">已兑换</div><div class="redeem-sub">今日份黄油年糕已领取</div>';var b=document.getElementById("stfBtn");b.className="btn btn-disabled";b.textContent="今日已核销";document.getElementById("stfNote").textContent="";}
-function stfRdm(){localStorage.setItem("sm_"+dk(),"1");sRd();}
-function go(id){document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("active");});document.getElementById(id).classList.add("active");window.scrollTo(0,0);}
-function back(){rt=0;pst(0);lbl.textContent="点击星星打分";bok.style.display="none";go("s1");}
-function dk(){return new Date().toISOString().slice(0,10);}
+/* ─── Language detection ─── */
+var isCN = /^zh/i.test(navigator.language || '');
+
+var T = {
+  starLabels: isCN
+    ? ['','\u4e0d\u592a\u6ee1\u610f','\u6709\u4e9b\u9057\u61be','\u8fd8\u4e0d\u9519','\u5f88\u559c\u6b22','\u592a\u597d\u4e86\uff0c\u7231\u4e86\uff01']
+    : ['','Not great','Could be better','It was OK','Really liked it','Absolutely loved it!'],
+  s1h: isCN ? '\u4eca\u5929\u611f\u89c9\u600e\u4e48\u6837\uff1f' : 'How was your visit?',
+  s1p: isCN
+    ? '\u82b1 30 \u79d2\u5206\u4eab\u4f60\u7684\u4f53\u9a8c\uff0c\u51ed\u672c\u9875\u9886\u53d6<strong>\u9ec4\u6cb9\u5e74\u7cd5</strong>\u4e00\u4efd &#x1F361;'
+    : 'Share your experience in 30 seconds &mdash; get a complimentary <strong>butter rice cake</strong> &#x1F361;',
+  s1lbl: isCN ? '\u70b9\u51fb\u661f\u661f\u6253\u5206' : 'Tap to rate',
+  s1btn: isCN ? '\u786e\u8ba4 \u2192' : 'Next \u2192',
+  s2h: isCN ? '\u4eca\u5929\u4f60\u6700\u559c\u6b22\u54ea\u4e2a\u73af\u8282\uff1f' : 'What stood out for you today?',
+  s2p: isCN ? '\u9009 1\u20133 \u4e2a\uff0c\u6211\u4eec\u5e2e\u4f60\u5199\u8bc4\u4ef7' : 'Pick 1\u20133 highlights and we\u2019ll draft your review',
+  s2btn: isCN ? '\u751f\u6210\u8bc4\u4ef7 \u2192' : 'Generate my review \u2192',
+  s3h: isCN ? '\u8fd9\u662f\u4e3a\u4f60\u51c6\u5907\u7684\u8bc4\u4ef7' : 'Here\u2019s your personalised review',
+  s3p: isCN
+    ? '\u590d\u5236\u540e\u70b9\u51fb\u4e0b\u65b9\u6309\u94ae\uff0cGoogle \u9875\u9762\u4f1a\u81ea\u52a8\u6253\u5f00\uff0c\u7c98\u8d34\u5373\u53ef\u53d1\u5e03\u3002'
+    : 'Copy the text below, then tap the button to open Google \u2014 paste and post.',
+  s3hint: isCN
+    ? '\u590d\u5236\u6587\u5b57\u540e\u70b9\u51fb\u6309\u94ae\uff0c\u5012\u8ba1\u65f6\u7ed3\u675f\u540e\u81ea\u52a8\u8df3\u8f6c\u5230\u9886\u53d6\u9875\u9762\u3002'
+    : 'After posting your review, return here \u2014 you\u2019ll be redirected automatically when the timer ends.',
+  s3gBtn: isCN ? '\u53bb\u5199 Google \u8bc4\u4ef7 \u2192' : 'Post on Google \u2192',
+  s3gDone: isCN ? '\u2705 \u5df2\u6253\u5f00 Google...' : '\u2705 Google opened\u2026',
+  s3cdTpl: isCN ? '\u8bc4\u4ef7\u5b8c\u6210\u540e\u56de\u5230\u672c\u9875\uff0c{s} \u79d2\u540e\u81ea\u52a8\u8df3\u8f6c\u2026' : 'Return here after posting. Redirecting in {s}s\u2026',
+  cpBtn: isCN ? '\u590d\u5236' : 'Copy',
+  cpDone: isCN ? '\u5df2\u590d\u5236 \u2713' : 'Copied \u2713',
+  s4h: isCN ? '\u62b1\u6b49\u6ca1\u80fd\u7ed9\u4f60\u6ee1\u5206\u4f53\u9a8c' : 'Sorry we didn\u2019t hit the mark',
+  s4p: isCN
+    ? '\u4f60\u7684\u5efa\u8bae\u5c06\u76f4\u8fbe\u5e97\u957f Roger\u3002\u8bf7\u544a\u8bc9\u6211\u4eec\u54ea\u91cc\u53ef\u4ee5\u505a\u5f97\u66f4\u597d\uff1f\uff08\u6211\u4eec\u975e\u5e38\u5e0c\u671b\u6709\u673a\u4f1a\u8865\u507f\u4f60\uff09'
+    : 'Your feedback goes straight to the manager. What can we improve? (We\u2019d love a chance to make it right.)',
+  s4ph: isCN ? '\u4ea7\u54c1 / \u670d\u52a1 / \u73af\u5883\u2026 \u4efb\u4f55\u771f\u5b9e\u611f\u53d7\u90fd\u6b22\u8fce\u3002' : 'Food, service, atmosphere\u2026 any honest feedback is welcome.',
+  s4btn: isCN ? '\u63d0\u4ea4\u5e76\u9886\u53d6\u5e74\u7cd5 &#x1F361;' : 'Submit & claim your rice cake &#x1F361;',
+  rdmTitle: isCN ? '\u8bf7\u5c55\u793a\u7ed9\u5e97\u5458' : 'Show this to a team member',
+  rdmSub: isCN ? '\u4ee5\u4e0b\u662f\u4f60\u5df2\u53d1\u5e03\u7684\u8bc4\u4ef7' : 'Review posted on Google:',
+  rdmBadge: isCN ? '\u9ec4\u6cb9\u5e74\u7cd5 \u00d7 1' : 'Butter rice cake \u00d7 1',
+  rdmSadTitle: isCN ? '\u611f\u8c22\u4f60\u7684\u53cd\u9988\uff01' : 'Thank you for your feedback!',
+  rdmSadSub: isCN ? '\u8bf7\u5c55\u793a\u7ed9\u5e97\u5458' : 'Show this to a team member',
+  expireLabel: isCN ? '\u51ed\u8bc1\u6709\u6548\u81f3\uff1a' : 'Valid until: ',
+  expireLive: isCN ? '\uff08\u5269\u4f59 {m} \u5206 {s} \u79d2\uff09' : '({m}m {s}s left)',
+  expiredTitle: isCN ? '\u51ed\u8bc1\u5df2\u8fc7\u671f' : 'Voucher Expired',
+  expiredBody: isCN
+    ? '\u6b64\u51ed\u8bc1\u6709\u6548\u671f\u4e3a 30 \u5206\u949f\u3002\u8bf7\u91cd\u65b0\u626b\u7801\u586b\u5199\u95ee\u5377\u3002'
+    : 'This voucher is valid for 30 minutes. Please scan the QR code again to get a new one.',
+  usedTitle: isCN ? '\u51ed\u8bc1\u5df2\u4f7f\u7528' : 'Already Redeemed',
+  usedBody: isCN ? '\u672c\u51ed\u8bc1\u5df2\u7ecf\u6838\u9500\u3002' : 'This voucher has already been used.',
+  stfBtn: isCN ? '[ \u5e97\u5458\u786e\u8ba4\u6838\u9500 ]' : '[ Staff: confirm redemption ]',
+  stfBtnDone: isCN ? '\u5df2\u6838\u9500' : 'Redeemed',
+  stfNote: isCN
+    ? '\u5e97\u5458\u70b9\u51fb\u540e\u9875\u9762\u9501\u5b9a\uff0c\u8bf7\u5728\u6536\u636e\u4e0a\u76d6\u7ae0\u6216\u6253\u53c9\u3002'
+    : 'Tap to lock. Please mark the receipt with a stamp or cross.',
+  back: isCN ? '\u2190 \u91cd\u65b0\u6253\u5206' : '\u2190 Re-rate'
+};
+
+/* ─── Keywords ─── */
+var KW = [
+  { id:'wifi',    lbl: isCN ? '&#x1F4F6; \u9ad8\u901f WiFi'      : '&#x1F4F6; Fast WiFi',       rv: 'the fast, reliable WiFi' },
+  { id:'drinks',  lbl: isCN ? '&#x2615; \u7279\u8c03\u8336\u548c\u548c\u5496\u5561' : '&#x2615; Creative drinks',  rv: 'the creative specialty drinks' },
+  { id:'pet',     lbl: isCN ? '&#x1F436; \u5ba0\u7269\u53cb\u597d'  : '&#x1F436; Pet-friendly',    rv: 'the pet-friendly policy' },
+  { id:'music',   lbl: isCN ? '&#x1F3B5; \u97f3\u4e50\u8212\u670d\u4e0d\u5435' : '&#x1F3B5; Chill music',      rv: 'the well-curated music that\u2019s easy on the ears' },
+  { id:'vibe',    lbl: isCN ? '&#x1FA91; \u6c14\u6c1b\u5c45\u9605'  : '&#x1FA91; Cozy vibes',      rv: 'the cozy, laid-back atmosphere' },
+  { id:'work',    lbl: isCN ? '&#x1F4BB; \u5b89\u9759\u597d\u529e\u516c' : '&#x1F4BB; Work-friendly',  rv: 'the calm, work-friendly setup' },
+  { id:'staff',   lbl: isCN ? '&#x1F91D; \u5c0f\u54e5\u5c0f\u59d0\u5f88\u53cb\u5584' : '&#x1F91D; Friendly staff',  rv: 'the genuinely warm and friendly staff' },
+  { id:'dessert', lbl: isCN ? '&#x1F370; \u751c\u54c1\u98ce\u5473\u771f\u5b9e' : '&#x1F370; Honest flavours', rv: 'desserts with real, honest flavour \u2014 no artificial aftertaste' },
+  { id:'sweet',   lbl: isCN ? '&#x1F36D; \u751c\u5ea6\u521a\u521a\u597d' : '&#x1F36D; Not too sweet',   rv: 'desserts that aren\u2019t overly sweet' },
+  { id:'nian',    lbl: isCN ? '&#x1F361; \u9ec4\u6cb9\u5e74\u7cd5\u6c38\u8fdc\u6b63\u786e' : '&#x1F361; Butter rice cake', rv: 'the butter rice cake (an absolute must-try)' }
+];
+
+/* ─── Review templates ─── */
+var TPLS = [
+  'Soul Made Spadina won me over with {A}. Add in {B}, and you\u2019ve got a spot that genuinely earns your return visit. Low-key, quality-focused, no fuss \u2014 exactly what a neighbourhood caf\u00e9 should be.',
+  'I came for {A} and stayed for everything else. The {B} shows real attention to detail, and the whole space has an unhurried energy that\u2019s hard to find. One of my favourite spots in the area now.',
+  '{A} alone makes Soul Made worth the trip. Factor in {B} and it becomes one of those rare caf\u00e9s you want to tell people about. Consistent, thoughtful, and genuinely welcoming.',
+  'What sets Soul Made apart is the care they put in. {A} is always on point, and {B} rounds out an experience that feels considered without being pretentious. A solid Spadina staple.',
+  'Soul Made gets the balance right \u2014 {A}, {B}, and a space that makes you want to slow down. The kind of place that doesn\u2019t need to be loud about how good it is. It just is.'
+];
+
+/* ─── Config ─── */
+var GU = 'https://search.google.com/local/writereview?placeid=ChIJm_vQheU1K4gRm95CQTp9JK8';
+var EM = 'soulmadeca@gmail.com';
+var CD_SECS = 25;   // countdown after Google click
+var EXPIRE_SECS = 1800; // 30 min voucher validity
+
+/* ─── State ─── */
+var rating = 0, selKw = [], curRv = '';
+var cdTimer = null, cdLeft = 0, googleOpened = false;
+var voucherToken = null, voucherStart = 0;
+var expireTimer = null;
+
+/* ─── Init UI text ─── */
+document.getElementById('t-s1h').textContent = T.s1h;
+document.getElementById('t-s1p').innerHTML   = T.s1p;
+document.getElementById('sLbl').textContent  = T.s1lbl;
+document.getElementById('btnOK').textContent = T.s1btn;
+document.getElementById('t-s2h').textContent = T.s2h;
+document.getElementById('t-s2p').textContent = T.s2p;
+document.getElementById('btnGen').textContent = T.s2btn;
+document.getElementById('t-s3h').textContent = T.s3h;
+document.getElementById('t-s3p').textContent = T.s3p;
+document.getElementById('t-s3hint').textContent = T.s3hint;
+document.getElementById('gBtn').textContent  = T.s3gBtn;
+document.getElementById('cpTag').textContent = T.cpBtn;
+document.getElementById('t-s4h').textContent = T.s4h;
+document.getElementById('t-s4p').textContent = T.s4p;
+document.getElementById('fbTxt').placeholder = T.s4ph;
+document.querySelector('#s4 .btn-dark').innerHTML = T.s4btn;
+document.querySelector('#s2 .back').textContent = T.back;
+document.querySelector('#s3 .back').textContent = T.back;
+document.querySelector('#s4 .back').textContent = T.back;
+
+/* ─── Build keyword chips ─── */
+var kwGrid = document.getElementById('kwGrid');
+KW.forEach(function(k) {
+  var b = document.createElement('button');
+  b.className = 'kw-chip'; b.innerHTML = k.lbl; b.setAttribute('data-id', k.id);
+  b.addEventListener('click', function() {
+    if (b.classList.contains('sel')) {
+      b.classList.remove('sel');
+      selKw = selKw.filter(function(x) { return x !== k.id; });
+    } else {
+      if (selKw.length >= 3) return;
+      b.classList.add('sel'); selKw.push(k.id);
+    }
+    document.getElementById('btnGen').style.opacity = selKw.length ? '1' : '0.5';
+  });
+  kwGrid.appendChild(b);
+});
+
+/* ─── Stars ─── */
+var starBtns = document.querySelectorAll('.star-btn');
+var sLbl = document.getElementById('sLbl');
+var btnOK = document.getElementById('btnOK');
+
+starBtns.forEach(function(b) {
+  b.addEventListener('click', function() {
+    rating = parseInt(b.getAttribute('data-val'));
+    pst(rating); sLbl.textContent = T.starLabels[rating]; btnOK.style.display = 'block';
+  });
+  b.addEventListener('mouseenter', function() { pst(parseInt(b.getAttribute('data-val'))); });
+  b.addEventListener('mouseleave', function() { pst(rating); });
+});
+function pst(n) {
+  starBtns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.getAttribute('data-val')) <= n); });
+}
+
+function onConfirm() {
+  if (!rating) return;
+  if (rating === 5) {
+    selKw = [];
+    document.querySelectorAll('.kw-chip').forEach(function(c) { c.classList.remove('sel'); });
+    document.getElementById('btnGen').style.opacity = '0.5';
+    go('s2');
+  } else {
+    document.getElementById('sdChip').textContent = '\u2b50 ' + rating + ' / 5';
+    document.getElementById('fbTxt').value = '';
+    go('s4');
+  }
+}
+
+/* ─── Generate review ─── */
+function genReview() {
+  if (!selKw.length) selKw = ['vibe', 'staff'];
+  var picks = selKw.map(function(id) {
+    var found = KW.filter(function(k) { return k.id === id; })[0];
+    return found ? found.rv : id;
+  });
+  var tpl = TPLS[Math.floor(Math.random() * TPLS.length)];
+  curRv = tpl.replace('{A}', picks[0]).replace('{B}', picks[1] || picks[0]).replace('{C}', picks[2] || picks[0]);
+
+  document.getElementById('rvTxt').textContent = curRv;
+  document.getElementById('cpTag').textContent = T.cpBtn;
+  document.getElementById('cpTag').classList.remove('done');
+
+  googleOpened = false;
+  clearInterval(cdTimer);
+  document.getElementById('cdWrap').style.display = 'none';
+  document.getElementById('cdBar').style.width = '100%';
+  var gb = document.getElementById('gBtn');
+  gb.textContent = T.s3gBtn;
+  gb.style.opacity = '1'; gb.style.pointerEvents = '';
+
+  go('s3');
+}
+
+/* ─── Copy review ─── */
+function cpRv() {
+  if (!curRv) return;
+  function ok() {
+    var t = document.getElementById('cpTag');
+    t.textContent = T.cpDone; t.classList.add('done');
+  }
+  if (navigator.clipboard) { navigator.clipboard.writeText(curRv).then(ok); }
+  else {
+    var el = document.createElement('textarea');
+    el.value = curRv; document.body.appendChild(el); el.select();
+    document.execCommand('copy'); document.body.removeChild(el); ok();
+  }
+}
+
+/* ─── Google click + countdown ─── */
+function onGoogle() {
+  window.open(GU, '_blank');
+  if (googleOpened) return;
+  googleOpened = true;
+
+  var gb = document.getElementById('gBtn');
+  gb.textContent = T.s3gDone;
+  gb.style.opacity = '0.55'; gb.style.pointerEvents = 'none';
+
+  cdLeft = CD_SECS;
+  document.getElementById('cdWrap').style.display = 'block';
+  updCD();
+
+  cdTimer = setInterval(function() {
+    cdLeft--;
+    updCD();
+    if (cdLeft <= 0) {
+      clearInterval(cdTimer);
+      voucherToken = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      voucherStart = Date.now();
+      showRdm5();
+    }
+  }, 1000);
+}
+
+function updCD() {
+  var pct = (cdLeft / CD_SECS * 100) + '%';
+  document.getElementById('cdBar').style.width = pct;
+  document.getElementById('cdTxt').textContent =
+    T.s3cdTpl.replace('{s}', cdLeft);
+}
+
+function subFb() {
+  var tx = document.getElementById('fbTxt').value.trim();
+  if (!tx) { document.getElementById('fbTxt').style.borderColor = 'var(--rust)'; return; }
+  var sj = encodeURIComponent('[DT \u5e97\u53cd\u9988] \u8bc4\u5206 ' + rating + '\u2605 \u00b7 ' + new Date().toLocaleDateString());
+  var bd = encodeURIComponent('\u5ba2\u4eba\u8bc4\u5206\uff1a' + rating + ' / 5\n\n\u610f\u89c1\uff1a\n' + tx + '\n\n\u6765\u6e90\uff1a\u6536\u636e\u626b\u7801\u95ee\u5377 \u00b7 ' + new Date().toLocaleString());
+  window.location.href = 'mailto:' + EM + '?subject=' + sj + '&body=' + bd;
+  setTimeout(function() {
+    voucherToken = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    voucherStart = Date.now();
+    showRdmSad();
+  }, 800);
+}
+
+function showRdm5() {
+  var key = 'sm_used_' + voucherToken;
+  if (localStorage.getItem(key)) { showUsed(); return; }
+    var expireAt = new Date(voucherStart + EXPIRE_SECS * 1000);
+  var hhim = expireAt.getHours().toString().padStart(2,'0') + ':' + expireAt.getMinutes().toString().padStart(2,'0');
+  var snippet = curRv.length > 120 ? curRv.slice(0, 117) + '\u2026' : curRv;
+  document.getElementById('rdmBody').innerHTML =
+    '<div class="rdm-wrap"><div class="rdm-emoji">&#x1F361;</div><div class="rdm-title">' + T.rdmTitle + '</div><div class="rdm-sub">' + T.rdmSub + '</div><div class="rdm-rv">&ldquo;' + snippet + '&rdquo;</div><div class="rdm-badge">' + T.rdmBadge + '</div><div class="expire-row">' + T.expireLabel + hhim + ' &nbsp;<span class="expire-live" id="expLive"></span></div></div>';
+  document.getElementById('stfBtn').textContent = T.stfBtn;
+  document.getElementById('stfBtn').className = 'btn btn-sage';
+  document.getElementById('stfBtn').style.pointerEvents = '';
+  document.getElementById('stfNote').textContent = T.stfNote;
+  go('s5'); startExpireCountdown(key);
+}
+
+function showRdmSad() {
+  var key = 'sm_used_' + voucherToken;
+  if (localStorage.getItem(key)) { showUsed(); return; }
+    var expireAt = new Date(voucherStart + EXPIRE_SECS * 1000);
+  var hhim = expireAt.getHours().toString().padStart(2,'0') + ':' + expireAt.getMinutes().toString().padStart(2,'0');
+  document.getElementById('rdmBody').innerHTML =
+    '<div class="rdm-wrap"><div class="rdm-emoji">&#x1F361;</div><div class="rdm-title">' + T.rdmSadTitle + '</div><div class="rdm-sub">' + T.rdmSadSub + '</div><div class="rdm-badge">' + T.rdmBadge + '</div><div class="expire-row">' + T.expireLabel + hhim + ' &nbsp;<span class="expire-live" id="expLive"></span></div></div>';
+  document.getElementById('stfBtn').textContent = T.stfBtn;
+  document.getElementById('stfBtn').className = 'btn btn-sage';
+  document.getElementById('stfBtn').style.pointerEvents = '';
+  document.getElementById('stfNote').textContent = T.stfNote;
+  go('s5'); startExpireCountdown(key);
+}
+
+function startExpireCountdown(key) {
+  clearInterval(expireTimer);
+  expireTimer = setInterval(function() {
+    var left = Math.floor((voucherStart + EXPIRE_SECS * 1000 - Date.now()) / 1000);
+    var el = document.getElementById('expLive');
+    if (!el) { clearInterval(expireTimer); return; }
+    if (left <= 0) { clearInterval(expireTimer); showExpired(); return; }
+    var m = Math.floor(left / 60), s = left % 60;
+    el.textContent = T.expireLive.replace('{m}', m).replace('{s}', s.toString().padStart(2,'0'));
+    el.className = 'expire-live' + (left < 120 ? ' urgent' : '');
+  }, 1000);
+}
+
+function showExpired() {
+  document.getElementById('rdmBody').innerHTML = '<div class="expire-box"><h2>&#x23F0; ' + T.expiredTitle + '</h2><p>' + T.expiredBody + '</p></div>';
+  document.getElementById('stfBtn').className = 'btn btn-lock';
+  document.getElementById('stfBtn').textContent = T.expiredTitle;
+  document.getElementById('stfNote').textContent = '';
+}
+
+function showUsed() {
+  document.getElementById('rdmBody').innerHTML = '<div class="expire-box"><h2>&#x2714;&#xFE0F; ' + T.usedTitle + '</h2><p>' + T.usedBody + '</p></div>';
+  document.getElementById('stfBtn').className = 'btn btn-lock';
+  document.getElementById('stfBtn').textContent = T.usedTitle;
+  document.getElementById('stfNote').textContent = '';
+  go('s5');
+}
+
+function stfRdm() {
+  if (!voucherToken) return;
+  localStorage.setItem('sm_used_' + voucherToken, '1');
+  clearInterval(expireTimer);
+  document.getElementById('rdmBody').innerHTML = '<div class="rdm-wrap"><div class="rdm-emoji">&#x2705;</div><div class="rdm-title">' + T.usedTitle + '</div><div class="rdm-sub">' + T.usedBody + '</div></div>';
+  document.getElementById('stfBtn').className = 'btn btn-lock';
+  document.getElementById('stfBtn').textContent = T.stfBtnDone;
+  document.getElementById('stfNote').textContent = '';
+}
+
+function go(id) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  clearInterval(cdTimer); clearInterval(expireTimer);
+  googleOpened = false; rating = 0; pst(0);
+  sLbl.textContent = T.s1lbl;
+  btnOK.style.display = 'none';
+  go('s1');
+}
 </script>
 </body>
 </html>
