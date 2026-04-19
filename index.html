@@ -7,10 +7,10 @@
 <style>
 :root{--cream:#FAF7F2;--espresso:#2C1A0E;--latte:#C8A882;--foam:#F0E8DC;--sage:#7A8C6E;--rust:#B85C38;--star:#E8B84B;--radius:16px;--shadow:0 4px 24px rgba(44,26,14,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Seghoe UI",sans-serif;background:var(--cream);color:var(--espresso);min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--espresso);min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);width:100%;max-width:420px;padding:36px 28px 32px;text-align:center;animation:fadeUp .35s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.logo{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--latte);margin-bottom:20px}
+.logo{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--latte);margin-bottom:20py}
 h1{font-size:22px;font-weight:700;line-height:1.35;margin-bottom:8px}
 .sub{font-size:14px;color:#7a6a5a;line-height:1.6;margin-bottom:28px}
 .stars-wrap{display:flex;justify-content:center;gap:10px;margin-bottom:10px}
@@ -129,97 +129,195 @@ textarea::placeholder{color:#b0a090}
 </div>
 
 <script>
-/* ─── Language detection ─── */
-var isCN = /^zh/i.test(navigator.language || '');
+/* ── Language detection ── */
+var _nl = navigator.language || '';
+var lang = /^zh/i.test(_nl) ? 'cn' : /^ko/i.test(_nl) ? 'kr' : 'en';
 
+/* ── UI strings ── */
 var T = {
-  starLabels: isCN
+  starLabels: lang === 'cn'
     ? ['','\u4e0d\u592a\u6ee1\u610f','\u6709\u4e9b\u9057\u61be','\u8fd8\u4e0d\u9519','\u5f88\u559c\u6b22','\u592a\u597d\u4e86\uff0c\u7231\u4e86\uff01']
+    : lang === 'kr'
+    ? ['','\uc544\uc26c\uc6e0\uc5b4\uc694','\uc2ec\uc2a4\ub7ec\uc6cc\uc694','\uad1c\uc54a\uc558\uc5b4\uc694','\uc88b\uc558\uc5b4\uc694','\uc644\uc804 \ucd5c\uace0\uc608\uc694!']
     : ['','Not great','Could be better','It was OK','Really liked it','Absolutely loved it!'],
-  s1h: isCN ? '\u4eca\u5929\u611f\u89c9\u600e\u4e48\u6837\uff1f' : 'How was your visit?',
-  s1p: isCN
+  s1h: lang === 'cn' ? '\u4eca\u5929\u611f\u89c9\u600e\u4e48\u6837\uff1f'
+     : lang === 'kr' ? '\uc624\ub298 \ubc29\ubb38\uc740 \uc5b4\ub5a0\uc148\ub098\uc694?'
+     : 'How was your visit?',
+  s1p: lang === 'cn'
     ? '\u82b1 30 \u79d2\u5206\u4eab\u4f60\u7684\u4f53\u9a8c\uff0c\u51ed\u672c\u9875\u9886\u53d6<strong>\u9ec4\u6cb9\u5e74\u7cd5</strong>\u4e00\u4efd &#x1F361;'
+    : lang === 'kr'
+    ? '30\ucd08\ub9cc \uc54c\ub824\uc8fc\uc2dc\uba74 <strong>\ubc84\ud130 \ubaa8\uce58 \ucf00\uc774\ud06c</strong> \ud55c \uc870\ub97c \ub4dc\ub9b4\uac8c\uc694 &#x1F361;'
     : 'Share your experience in 30 seconds &mdash; get a complimentary <strong>butter mochi cake</strong> &#x1F361;',
-  s1lbl: isCN ? '\u70b9\u51fb\u661f\u661f\u6253\u5206' : 'Tap to rate',
-  s1btn: isCN ? '\u786e\u8ba4 \u2192' : 'Next \u2192',
-  s2h: isCN ? '\u4eca\u5929\u4f60\u6700\u559c\u6b22\u54ea\u4e2a\u73af\u8282\uff1f' : 'What stood out for you today?',
-  s2p: isCN ? '\u9009 1\u20133 \u4e2a\uff0c\u6211\u4eec\u5e2e\u4f60\u5199\u8bc4\u4ef7' : 'Pick 1\u20133 highlights and we\u2019ll draft your review',
-  s2btn: isCN ? '\u751f\u6210\u8bc4\u4ef7 \u2192' : 'Generate my review \u2192',
-  s3h: isCN ? '\u8fd9\u662f\u4e3a\u4f60\u51c6\u5907\u7684\u8bc4\u4ef7' : 'Here\u2019s your personalised review',
-  s3p: isCN
-    ? '\u590d\u5236\u540e\u70b9\u51fb\u4e0b\u65b9\u6309\u94ae\uff0cGoogle \u9875\u9762\u4f1a\u81ea\u52a8\u6253\u5f00\uff0c\u7c98\u8d34\u5373\u53ef\u53d1\u5e03\u3002'
+  s1lbl: lang === 'cn' ? '\u70b9\u51fb\u661f\u661f\u6253\u5206'
+       : lang === 'kr' ? '\ubcc4\uc744 \ub208\ub7ec \ud3c9\uc810\uc744 \ub0a8\uaca8\uc8fc\uc138\uc694'
+       : 'Tap to rate',
+  s1btn: lang === 'cn' ? '\u786e\u8ba4 \u2192' : lang === 'kr' ? '\ub2e4\uc74c \u2192' : 'Next \u2192',
+  s2h: lang === 'cn' ? '\u4eca\u5929\u4f60\u6700\u559c\u6b22\u54ea\u4e2a\u73af\u8282\uff1f'
+     : lang === 'kr' ? '\uc624\ub298 \uac00\uc7a5 \uc88b\uc558\ub358 \uac8c \ubb50\uc600\ub098\uc694?'
+     : 'What stood out for you today?',
+  s2p: lang === 'cn' ? '\u9009 1\u20133 \u4e2a\uff0c\u6211\u4eec\u5e2e\u4f60\u5199\u8bc4\u4ef7'
+     : lang === 'kr' ? '1\ub2f93\uac00\uc9c0\ub97c \uace8\ub77c\uc8fc\uc2dc\uba74 \ub9ac\ube70\ub97c \uc791\uc131\ud574\ub4dc\ub824\uc694'
+     : 'Pick 1\u20133 highlights and we\u2019ll draft your review',
+  s2btn: lang === 'cn' ? '\u751f\u6210\u8bc4\u4ef7 \u2192'
+       : lang === 'kr' ? '\ub9ac\ubdf0 \uc0dd\uc131\ud558\uae30 \u2192'
+       : 'Generate my review \u2192',
+  s3h: lang === 'cn' ? '\u8fd9\u662f\u4e3a\u4f60\u51c6\u5907\u7684\u8bc4\u4ef7'
+     : lang === 'kr' ? '\ub9de\ucda4 \ub9ac\ube70\uac00 \uc900\ube44\ub418\uc5c8\uc5b4\uc694'
+     : 'Here\u2019s your personalised review',
+  s3p: lang === 'cn'
+    ? '\u590d\u5236\u4e0b\u65b9\u6587\u5b57\uff0c\u7c98\u8d34\u5230 Google \u8bc4\u4ef7\u91cc\u5c31\u597d \ud83d\udc47'
+    : lang === 'kr'
+    ? '\uc544\ub798 \ubb38\uc7a5\uc744 \ubcf5\uc0ac\ud55c \ud6c4, \ubc84\ud2bc\uc744 \ub20c\ub7ec Google\uc5d0 \uc5f0\ubd99\uc5ec\ub123\uc5b4 \uc8fc\uc138\uc694.'
     : 'Copy the text below, then tap the button to open Google \u2014 paste and post.',
-  s3hint: isCN
+  s3hint: lang === 'cn'
     ? '\u590d\u5236\u6587\u5b57\u540e\u70b9\u51fb\u6309\u94ae\uff0c\u5012\u8ba1\u65f6\u7ed3\u675f\u540e\u81ea\u52a8\u8df3\u8f6c\u5230\u9886\u53d6\u9875\u9762\u3002'
+    : lang === 'kr'
+    ? '\ub9ac\ube70 \uc791\uc131 \ud6c4 \ub3cc\uc544\uc624\uc138\uc694. \ud0c0\uc774\uba38\uac00 \ub05d\ub098\uba74 \uc790\ub3d9\uc73c\ub85c \ub118\uc5b4\uac11\ub2c8\ub2e4.'
     : 'After posting your review, return here \u2014 you\u2019ll be redirected automatically when the timer ends.',
-  s3gBtn: isCN ? '\u53bb\u5199 Google \u8bc4\u4ef7 \u2192' : 'Post on Google \u2192',
-  s3gDone: isCN ? '\u2705 \u5df2\u6253\u5f00 Google...' : '\u2705 Google opened\u2026',
-  s3cdTpl: isCN ? '\u8bc4\u4ef7\u5b8c\u6210\u540e\u56de\u5230\u672c\u9875\uff0c{s} \u79d2\u540e\u81ea\u52a8\u8df3\u8f6c\u2026' : 'Return here after posting. Redirecting in {s}s\u2026',
-  cpBtn: isCN ? '\u590d\u5236' : 'Copy',
-  cpDone: isCN ? '\u5df2\u590d\u5236 \u2713' : 'Copied \u2713',
-  s4h: isCN ? '\u62b1\u6b49\u6ca1\u80fd\u7ed9\u4f60\u6ee1\u5206\u4f53\u9a8c' : 'Sorry we didn\u2019t hit the mark',
-  s4p: isCN
+  s3gBtn: lang === 'cn' ? '\u53bb\u5199 Google \u8bc4\u4ef7 \u2192'
+        : lang === 'kr' ? 'Google\uc5d0 \ub9ac\ubdf0 \ub0a8\uae30\uae30 \u2192'
+        : 'Post on Google \u2192',
+  s3gDone: lang === 'cn' ? '\u2705 \u5df2\u6253\u5f00 Google...'
+         : lang === 'kr' ? '\u2705 Google\uc774 \uc5f4\ub838\uc5b4\uc694\u2026'
+         : '\u2705 Google opened\u2026',
+  s3cdTpl: lang === 'cn' ? '\u8bc4\u4ef7\u5b8c\u6210\u540e\u56de\u5230\u672c\u9875\uff0c{s} \u79d2\u540e\u81ea\u52a8\u8df3\u8f6c\u2026'
+         : lang === 'kr' ? '\ub9ac\ube70 \uc791\uc131 \ud6c4 \ub3cc\uc544\uc624\uc138\uc694. {s}\ucd08 \ud6c4 \uc790\ub3d9 \uc774\ub3d9\u2026'
+         : 'Return here after posting. Redirecting in {s}s\u2026',
+  cpBtn:  lang === 'cn' ? '\u590d\u5236' : lang === 'kr' ? '\ubcf5\uc0ac' : 'Copy',
+  cpDone: lang === 'cn' ? '\u5df2\u590d\u5236 \u2713' : lang === 'kr' ? '\ubcf5\uc0ac\ub428 \u2713' : 'Copied \u2713',
+  s4h: lang === 'cn' ? '\u62b1\u6b49\u6ca1\u80fd\u7ed9\u4f60\u6ee1\u5206\u4f53\u9a8c'
+     : lang === 'kr' ? '\uae30\ub300\uc5d0 \ubbf8\uce58\uc9c0 \ubabb\ud574 \uc8c4\uc1a1\ud569\ub2c8\ub2e4'
+     : 'Sorry we didn\u2019t hit the mark',
+  s4p: lang === 'cn'
     ? '\u4f60\u7684\u5efa\u8bae\u5c06\u76f4\u8fbe\u5e97\u957f Roger\u3002\u8bf7\u544a\u8bc9\u6211\u4eec\u54ea\u91cc\u53ef\u4ee5\u505a\u5f97\u66f4\u597d\uff1f\uff08\u6211\u4eec\u975e\u5e38\u5e0c\u671b\u6709\u673a\u4f1a\u8865\u507f\u4f60\uff09'
+    : lang === 'kr'
+    ? '\uc758\uacac\uc740 \uc810\uc7a5 Roger\uc5d0\uac8c \uc9c1\uc811 \uc804\ub2ec\ub429\ub2c8\ub2e4. \uac1c\uc120\ud560 \uc810\uc744 \uc54c\ub824\uc8fc\uc138\uc694. (\uaf2c\ub099 \ubcf4\uc0c1\ud574\ub4dc\ub9ac\uace0 \uc2f6\uc5b4\uc694)'
     : 'Your feedback goes straight to the manager. What can we improve? (We\u2019d love a chance to make it right.)',
-  s4ph: isCN ? '\u4ea7\u54c1 / \u670d\u52a1 / \u73af\u5883\u2026 \u4efb\u4f55\u771f\u5b9e\u611f\u53d7\u90fd\u6b22\u8fce\u3002' : 'Food, service, atmosphere\u2026 any honest feedback is welcome.',
-  s4btn: isCN ? '\u63d0\u4ea4\u5e76\u9886\u53d6\u5e74\u7cd5 &#x1F361;' : 'Submit & claim your mochi cake &#x1F361;',
-  rdmTitle: isCN ? '\u8bf7\u5c55\u793a\u7ed9\u5e97\u5458' : 'Show this to a team member',
-  rdmSub: isCN ? '\u4ee5\u4e0b\u662f\u4f60\u5df2\u53d1\u5e03\u7684\u8bc4\u4ef7' : 'Review posted on Google:',
-  rdmBadge: isCN ? '\u9ec4\u6cb9\u5e74\u7cd5 \u00d7 1' : 'Butter mochi cake \u00d7 1',
-  rdmSadTitle: isCN ? '\u611f\u8c22\u4f60\u7684\u53cd\u9988\uff01' : 'Thank you for your feedback!',
-  rdmSadSub: isCN ? '\u8bf7\u5c55\u793a\u7ed9\u5e97\u5458' : 'Show this to a team member',
-  expireLabel: isCN ? '\u51ed\u8bc1\u6709\u6548\u81f3\uff1a' : 'Valid until: ',
-  expireLive: isCN ? '\uff08\u5269\u4f59 {m} \u5206 {s} \u79d2\uff09' : '({m}m {s}s left)',
-  expiredTitle: isCN ? '\u51ed\u8bc1\u5df2\u8fc7\u671f' : 'Voucher Expired',
-  expiredBody: isCN
+  s4ph: lang === 'cn' ? '\u4ea7\u54c1 / \u670d\u52a1 / \u73af\u5883\u2026 \u4efb\u4f55\u771f\u5b9e\u7684\u611f\u53d7\u90fd\u6b22\u8fce\u3002'
+      : lang === 'kr' ? '\uc74c\uc2dd / \uc11c\ube44\uc2a4 / \ubd84\uc704\uae30\u2026 \uc194\uc9c1\ud55c \uc758\uacac\uc744 \ud658\uc601\ud569\ub2c8\ub2e4.'
+      : 'Food, service, atmosphere\u2026 any honest feedback is welcome.',
+  s4btn: lang === 'cn' ? '\u63d0\u4ea4\u5e76\u9886\u53d6\u5e74\u7cd5 &#x1F361;'
+       : lang === 'kr' ? '\uc81c\ucd9c\ud558\uace0 \ub225 \ubc1b\uae30 &#x1F361;'
+       : 'Submit &amp; claim your mochi cake &#x1F361;',
+  rdmTitle: lang === 'cn' ? '\u8bf7\u5c55\u793a\u7ed9\u5e97\u5458'
+          : lang === 'kr' ? '\uc9c1\uc6d0\uc5d0\uac8c \ubcf4\uc5ec\uc8fc\uc138\uc694'
+          : 'Show this to a team member',
+  rdmSub: lang === 'cn' ? '\u4ee5\u4e0b\u662f\u4f60\u5df2\u53d1\u5e03\u7684\u8bc4\u4ef7'
+        : lang === 'kr' ? 'Google\uc5d0 \uac8c\uc2dc\ub41c \ub9ac\ube70:'
+        : 'Review posted on Google:',
+  rdmBadge: lang === 'cn' ? '\u9ec4\u6cb9\u5e74\u7cd5 \u00d7 1'
+          : lang === 'kr' ? '\ubc84\ud130 \ubaa8\uce58 \ucf00\uc774\ud06c \u00d7 1'
+          : 'Butter mochi cake \u00d7 1',
+  rdmSadTitle: lang === 'cn' ? '\u611f\u8c22\u4f60\u7684\u771f\u5b9e\u53cf\u9988\uff01'
+             : lang === 'kr' ? '\uc758\uacac\uc744 \ub0a8\uacจ\uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4!'
+             : 'Thank you for your feedback!',
+  rdmSadSub: lang === 'cn' ? '\u8bf7\u5c55\u793a\u7ed9\u5e97\u5458'
+           : lang === 'kr' ? '\uc9c1\uc6d0\uc5d0\uac8c \ubcf4\uc5ec\uc8fc\uc138\uc694'
+           : 'Show this to a team member',
+  expireLabel: lang === 'cn' ? '\u51ed\u8bc1\u6709\u6548\u81f3\uff1a'
+             : lang === 'kr' ? '\uc720\ud6a8 \uae30\ud55c: '
+             : 'Valid until: ',
+  expireLive: lang === 'cn' ? '\uff08\u5269\u4f59 {m} \u5206 {s} \u79d2\uff09'
+            : lang === 'kr' ? '({m}\ubd84 {s}\ucd08 \ub0a8\uc74c)'
+            : '({m}m {s}s left)',
+  expiredTitle: lang === 'cn' ? '\u51ed\u8bc1\u5df2\u8fc7\u671f'
+              : lang === 'kr' ? '\ucfe0\ud3f0\uc774 \ub9cc\ub8cc\ub418\uc5c8\uc5b4\uc694'
+              : 'Voucher Expired',
+  expiredBody: lang === 'cn'
     ? '\u6b64\u51ed\u8bc1\u6709\u6548\u671f\u4e3a 30 \u5206\u949f\u3002\u8bf7\u91cd\u65b0\u626b\u7801\u586b\u5199\u95ee\u5377\u3002'
+    : lang === 'kr'
+    ? '\uc774 \ucfe0\ud3f0\uc740 30\ubd84 \ub3d9\uc548 \uc720\ud6a8\ud569\ub2c8\ub2e4. QR \ucf54\ub4dc\ub97c \ub2e4\uc2dc \uc2a4\uce94\ud574 \uc8fc\uc138\uc694.'
     : 'This voucher is valid for 30 minutes. Please scan the QR code again to get a new one.',
-  usedTitle: isCN ? '\u51ed\u8bc1\u5df2\u4f7f\u7528' : 'Already Redeemed',
-  usedBody: isCN ? '\u672c\u51ed\u8bc1\u5df2\u7ecf\u6838\u9500\u3002' : 'This voucher has already been used.',
-  stfBtn: isCN ? '[ \u5e97\u5458\u786e\u8ba4\u6838\u9500 ]' : '[ Staff: confirm redemption ]',
-  stfBtnDone: isCN ? '\u5df2\u6838\u9500' : 'Redeemed',
-  stfNote: isCN
-    ? '\u5e97\u5458\u70b9\u51fb\u540e\u9875\u9762\u9501\u5b9a\uff0c\u8bf7\u5728\u6536\u636e\u4e0a\u76d6\u7ae0\u6216\u6253\u53c9\u3002'
+  usedTitle: lang === 'cn' ? '\u51ed\u8bc1\u5df2\u4f7f\u7528'
+           : lang === 'kr' ? '\uc774\ubbf8 \uc0ac\uc6a9\ub428'
+           : 'Already Redeemed',
+  usedBody: lang === 'cn' ? '\u672c\u51ed\u8bc1\u5df2\u7ecf\u6838\u9500\u3002'
+          : lang === 'kr' ? '\uc774 \ucfe0\ud3f0\uc740 \uc774\ubbf8 \uc0ac\uc6a9\ub418\uc5c8\uc2b5\ub2c8\ub2e4.'
+          : 'This voucher has already been used.',
+  stfBtn: lang === 'cn' ? '[ \u5e97\u5458\u786e\u8ba4\u6838\u9500 ]'
+        : lang === 'kr' ? '[ \uc9c1\uc6d0 \ud655\uc778 ]'
+        : '[ Staff: confirm redemption ]',
+  stfBtnDone: lang === 'cn' ? '\u5df2\u6838\u9500' : lang === 'kr' ? '\uc0ac\uc6a9 \uc644\ub8cc' : 'Redeemed',
+  stfNote: lang === 'cn'
+    ? '\u5e97\u5458\u70b9\u51fb\u540e\u9875\u9762\u9501\u5b9a\uff0c\u8bf7\u5728\u6536\u636e\u4e0b\u76d6\u7ae0\u6216\u6253\u53c9\u3002'
+    : lang === 'kr'
+    ? '\ud655\uc778 \ud6c4 \uc601\uc218\uc99d\uc5d0 \ub3c4\uc7a5\uc744 \ucc0e\uac70\ub098 X \ud45c\uc2dc\ub97c \ud574\uc8fc\uc138\uc694.'
     : 'Tap to lock. Please mark the receipt with a stamp or cross.',
-  back: isCN ? '\u2190 \u91cd\u65b0\u6253\u5206' : '\u2190 Re-rate'
+  back: lang === 'cn' ? '\u2190 \u91cd\u65b0\u6253\u5206' : lang === 'kr' ? '\u2190 \ub2e4\uc2dc \ud3c9\uac00\ud558\uae30' : '\u2190 Re-rate'
 };
 
-/* ─── Keywords ─── */
+/* ── Keywords (lbl + rv per language) ── */
 var KW = [
-  { id:'wifi',    lbl: isCN ? '&#x1F4F6; \u9ad8\u901f WiFi'      : '&#x1F4F6; Fast WiFi',       rv: 'the fast, reliable WiFi' },
-  { id:'drinks',  lbl: isCN ? '&#x2615; \u7279\u8c03\u8336\u548c\u548c\u5496\u5561' : '&#x2615; Creative drinks',  rv: 'the creative specialty drinks' },
-  { id:'pet',     lbl: isCN ? '&#x1F436; \u5ba0\u7269\u53cb\u597d'  : '&#x1F436; Pet-friendly',    rv: 'the pet-friendly policy' },
-  { id:'music',   lbl: isCN ? '&#x1F3B5; \u97f3\u4e50\u8212\u670d\u4e0d\u5435' : '&#x1F3B5; Chill music',      rv: 'the well-curated music that\u2019s easy on the ears' },
-  { id:'vibe',    lbl: isCN ? '&#x1FA91; \u6c14\u6c1b\u5c45\u9605'  : '&#x1FA91; Cozy vibes',      rv: 'the cozy, laid-back atmosphere' },
-  { id:'work',    lbl: isCN ? '&#x1F4BB; \u5b89\u9759\u597d\u529e\u516c' : '&#x1F4BB; Work-friendly',  rv: 'the calm, work-friendly setup' },
-  { id:'staff',   lbl: isCN ? '&#x1F91D; \u5458\u5de5\u5f88\u53cb\u5584' : '&#x1F91D; Friendly staff',  rv: 'the genuinely warm and friendly staff' },
-  { id:'dessert', lbl: isCN ? '&#x1F370; \u751c\u54c1\u98ce\u5473\u771f\u5b9e' : '&#x1F370; Honest flavours', rv: 'desserts with real, honest flavour \u2014 no artificial aftertaste' },
-  { id:'sweet',   lbl: isCN ? '&#x1F36D; \u751c\u5ea6\u521a\u521a\u597d' : '&#x1F36D; Not too sweet',   rv: 'desserts that aren\u2019t overly sweet' },
-  { id:'nian',    lbl: isCN ? '&#x1F361; \u9ec4\u6cb9\u5e74\u7cd5\u6c38\u8fdc\u6b63\u786e' : '&#x1F361; Butter mochi cake', rv: 'the butter mochi cake (an absolute must-try)' }
+  { id:'wifi',
+    lbl: lang==='cn' ? '&#x1F4F6; \u9ad8\u901f WiFi' : lang==='kr' ? '&#x1F4F6; \ube60\ub978 WiFi' : '&#x1F4F6; Fast WiFi',
+    rv:  lang==='cn' ? '\u7a33\u5b9a\u5feb\u901f\u7684 WiFi' : lang==='kr' ? '\ube60\ub974\uace0 \uc548\uc815\uc801\uc778 WiFi' : 'the fast, reliable WiFi' },
+  { id:'drinks',
+    lbl: lang==='cn' ? '&#x2615; \u7279\u8c03\u8336\u548c\u548c\u5496\u5561' : lang==='kr' ? '&#x2615; \ud2b9\uc81c \uc74c\ub8cc' : '&#x2615; Creative drinks',
+    rv:  lang==='cn' ? '\u522b\u51fa\u5fc3\u88c1\u7684\u7279\u8c03\u996e\u54c1' : lang==='kr' ? '\uac1c\uc131 \uc788\ub294 \ud2b9\uc81c \uc74c\ub8cc' : 'the creative specialty drinks' },
+  { id:'pet',
+    lbl: lang==='cn' ? '&#x1F436; \u5ba0\u7269\u53cb\u597d' : lang==='kr' ? '&#x1F436; \ubc18\ub824\ub3d9\ubb3c \ud658\uc601' : '&#x1F436; Pet-friendly',
+    rv:  lang==='cn' ? '\u5bab\u7269\u53cb\u597d\u7684\u8fd0\u8425\u7406\u5ff5' : lang==='kr' ? '\ubc18\ub824\ub3d9\ubb3c\uc744 \ud658\uc601\ud558\ub294 \ubd84\uc704\uae30' : 'the pet-friendly policy' },
+  { id:'music',
+    lbl: lang==='cn' ? '&#x1F3B5; \u97f3\u4e50\u8212\u670d\u4e0d\u5435' : lang==='kr' ? '&#x1F3B5; \ud3b8\uc548\ud55c \uc74c\uc545' : '&#x1F3B5; Chill music',
+    rv:  lang==='cn' ? '\u6070\u5230\u597d\u5904\u7684\u80cc\u666f\u97f3\u4e50' : lang==='kr' ? '\uadc0\uc5d0 \ud3b8\uc548\ud55c \ubc30\uacbd \uc74c\uc545' : 'the well-curated music that\u2019s easy on the ears' },
+  { id:'vibe',
+    lbl: lang==='cn' ? '&#x1FA91; \u6c14\u6c1b\u5c45\u9605' : lang==='kr' ? '&#x1FA91; \uc544\ub2a5\ud55c \ubd84\uc704\uae30' : '&#x1FA91; Cozy vibes',
+    rv:  lang==='cn' ? '\u8212\u9002\u60ac\u9598\u7684\u6c1b\u56f4' : lang==='kr' ? '\uc544\ub2a5\ud558\uace0 \ub290\uae0b\ud55c \ubd84\uc704\uae30' : 'the cozy, laid-back atmosphere' },
+  { id:'work',
+    lbl: lang==='cn' ? '&#x1F4BB; \u5b89\u9759\u597d\u529e\u516c' : lang==='kr' ? '&#x1F4BB; \uc791\uc5c5\ud558\uae30 \uc88b\uc740 \ud658\uacbd' : '&#x1F4BB; Work-friendly',
+    rv:  lang==='cn' ? '\u5b89\u9759\u9002\u5408\u5de5\u4f5c\u7684\u73af\u5883' : lang==='kr' ? '\uc870\uc6a9\ud558\uace0 \uc791\uc5c5\ud558\uae30 \uc88b\uc740 \ud658\uacbd' : 'the calm, work-friendly setup' },
+  { id:'staff',
+    lbl: lang==='cn' ? '&#x1F91D; \u5458\u5de5\u5f88\u53cb\u5584' : lang==='kr' ? '&#x1F91D; \uc9c1\uc6d0\uc774 \uce5c\uc808\ud574\uc694' : '&#x1F91D; Friendly staff',
+    rv:  lang==='cn' ? '\u53cb\u5584\u70ed\u60c5\u7684\u5de5\u4f5c\u4eba\u5458' : lang==='kr' ? '\uc9c4\uc2ec\uc73c\ub85c \uce5c\uc808\ud55c \uc9c1\uc6d0\ub4e4' : 'the genuinely warm and friendly staff' },
+  { id:'dessert',
+    lbl: lang==='cn' ? '&#x1F370; \u751c\u54c1\u98ce\u5473\u771f\u5b9e' : lang==='kr' ? '&#x1F370; \uc9c4\uc9dc \ub9db \ub514\uc800\ud2b8' : '&#x1F370; Honest flavours',
+    rv:  lang==='cn' ? '\u98ce\u5473\u771f\u5b9e\u6ca1\u6709\u4eba\u5de5\u611f\u7684\u751c\u54c1' : lang==='kr' ? '\uc778\uacf5\uc801\uc774\uc9c0 \uc54a\uace0 \uc9c4\uc9dc \ub9db\uc774 \ub098\ub294 \ub514\uc800\ud2b8' : 'desserts with real, honest flavour \u2014 no artificial aftertaste' },
+  { id:'sweet',
+    lbl: lang==='cn' ? '&#x1F36D; \u751c\u5ea6\u521a\u521a\u597d' : lang==='kr' ? '&#x1F36D; \uc801\ub2f9\ud55c \ub2e8\ub9db' : '&#x1F36D; Not too sweet',
+    rv:  lang==='cn' ? '\u751c\u5ea6\u6070\u5230\u597d\u5904\u7684\u751c\u54c1' : lang==='kr' ? '\ub108\ubb34 \ub2ec\uc9c0 \uc54a\uc740 \ub514\uc800\ud2b8' : 'desserts that aren\u2019t overly sweet' },
+  { id:'nian',
+    lbl: lang==='cn' ? '&#x1F361; \u9ec4\u6cb9\u5e74\u7cd5\u6c38\u8fdc\u6b63\u786e' : lang==='kr' ? '&#x1F361; \ubc84\ud130 \ubaa8\uce58 \ucf00\uc774\ud06c' : '&#x1F361; Butter mochi cake',
+    rv:  lang==='cn' ? '\u9ec4\u6cb9\u5e74\u7cd5\uff08\u5f3a\u70c8\u63a8\u8350\uff09' : lang==='kr' ? '\ubc84\ud130 \ubaa8\uce58 \ucf00\uc774\ud06c (\uaefd \uba39\uc5b4\ubcf4\uc138\uc694!)' : 'the butter mochi cake (an absolute must-try)' }
 ];
 
-/* ─── Review templates ─── */
-var TPLS = [
-  'Soul Made Spadina won me over with {A}. Add in {B}, and you\u2019ve got a spot that genuinely earns your return visit. Low-key, quality-focused, no fuss \u2014 exactly what a neighbourhood caf\u00e9 should be.',
-  'I came for {A} and stayed for everything else. The {B} shows real attention to detail, and the whole space has an unhurried energy that\u2019s hard to find. One of my favourite spots in the area now.',
-  '{A} alone makes Soul Made worth the trip. Factor in {B} and it becomes one of those rare caf\u00e9s you want to tell people about. Consistent, thoughtful, and genuinely welcoming.',
-  'What sets Soul Made apart is the care they put in. {A} is always on point, and {B} rounds out an experience that feels considered without being pretentious. A solid Spadina staple.',
-  'Soul Made gets the balance right \u2014 {A}, {B}, and a space that makes you want to slow down. The kind of place that doesn\u2019t need to be loud about how good it is. It just is.'
-];
+/* ── Review templates per language ── */
+var TPLS = {
+  en: [
+    'Soul Made Spadina won me over with {A}. Add in {B}, and you\u2019ve got a spot that genuinely earns your return visit. Low-key, quality-focused, no fuss \u2014 exactly what a neighbourhood caf\u00e9 should be.',
+    'I came for {A} and stayed for everything else. The {B} shows real attention to detail, and the whole space has an unhurried energy that\u2019s hard to find. One of my favourite spots in the area now.',
+    '{A} alone makes Soul Made worth the trip. Factor in {B} and it becomes one of those rare caf\u00e9s you want to tell people about. Consistent, thoughtful, and genuinely welcoming.',
+    'What sets Soul Made apart is the care they put in. {A} is always on point, and {B} rounds out an experience that feels considered without being pretentious. A solid Spadina staple.',
+    'Soul Made gets the balance right \u2014 {A}, {B}, and a space that makes you want to slow down. The kind of place that doesn\u2019t need to be loud about how good it is. It just is.'
+  ],
+  cn: [
+    'Soul Made Spadina \u7526{A}\u6253\u52a8\u4e86\u6211\uff0c\u518d\u52a0\u4e0a{B}\uff0c\u8ba9\u8fd9\u91cc\u6210\u4e86\u6211\u613f\u610f\u4e00\u518d\u9020\u8bbf\u7684\u5730\u65b9\u3002\u4f4e\u8c03\u3001\u54c1\u8d28\u51fa\u4f17\u3001\u6ca1\u6709\u591a\u4f59\u7684\u566a\u6760\u2014\u2014\u6b63\u662f\u4e00\u5bb6\u793e\u533a\u548a\u5537\u8be5\u6709\u7684\u6a21\u6837u3002',
+    '\u6765\u662f\u4e3a\u4e86{A}\uff0c\u5374\u56e0\u4e3a\u4e00\u5207\u800c\u7559\u4e86\u4e0b\u6765\u3002{B}\u4f53\u73b0\u4e86\u5bf9\u7ec6\u8282\u7684\u771f\u5b9e\u7528\u5fc3\uff0c\u6574\u4e2a\u7a7a\u95f4\u6709\u79cd\u4ece\u5bb9\u4e0d\u8feb\u7684\u6c1b\u56f4\uff0c\u5728\u522b\u5904\u5f88\u96be\u627e\u5230\u3002\u73b0\u5728\u5df2\u7ecf\u662f\u6211\u5728\u8fd9\u4e00\u5e26\u6700\u559c\u6b22\u7684\u5730\u65b9\u4e4b\u4e00\u3002',
+    '\u5149\u662f{A}\u5c31\u503c\u5f97\u4e13\u7a0b\u524d\u6765\u3002\u518d\u8003\u8651{B}\uff0c Soul Made \u5c31\u6210\u4e86\u90a3\u79cd\u4f60\u60f3\u544a\u8bc9\u8eab\u8fb9\u4eba\u7684\u5c0f\u4f17\u5fc3\u5934\u3002\u7a33\u5b9a\u3001\u7528\u5fc3\u3001\u71df\u9020\u771f\u5b9e\u7684\u9986\u5185\u6c1b\u56f4\u3002',
+    'Soul Made \u8ba9\u6211\u5370\u8c61\u6700\u6df1\u7684\uff0c\u662f\u4ed6\u4eec\u5bf9\u6bcf\u4e2a\u73af\u8282\u6295\u5165\u7684\u8ba4\u771f\u3002{A}\u59cb\u7ec8\u7a33\u5b9a\u53d1\u6325\uff0c{B}\u8ba9\u6574\u4f53\u4f53\u9a8c\u611f\u89c9\u7ecf\u8fb7\u7cbe\u5fc3\u8bbe\u8ba1\u5374\u6beb\u4e0d\u81ea\u8bc4\u3002Spadina \u4e00\u5e26\u7684\u538b\u7b95\u4e4b\u9009\u3002',
+    'Soul Made \u628a\u5747\u8861\u628a\u63e1\u5f97\u5f88\u597d\u2014\u2014{A}\u3001{B}\uff0c\u52a0\u4e0a\u4e00\u4e2a\u771f\u7684\u80fd\u8ba9\u4eba\u653e\u6162\u811a\u6b65\u7684\u7a7a\u95f4\u3002\u8fd9\u91cc\u4e0d\u9700\u8981\u5927\u58f0\u5ba3\u626c\u81ea\u5df1\u6709\u591a\u597d\uff0c\u56e0\u4e3a\u5b83\u672c\u6765\u5c31\u5f88\u597d\u3002'
+  ],
+  kr: [
+    'Soul Made Spadina\uc740 {A}(\uac73c\ub85c \uc800\ub97c \uc0ac\ub85c\uc7a1\uc558\uace0, {B}\uae4c\uc9c0 \ub354\ud574\uc9c0\ub2c8 \uacc4\uc18d \ucc3e\uace0 \uc2f6\uc5b4\uc9c0\ub294 \uace3\uc774 \ub49c\uc5b4\uc694. \uc870\uc6a9\ud558\uace0, \ud488\uc9c8\uc5d0 \uc9d1\uc911\ud558\uba70, \ubd88\ud544\uc694\ud55c \uacfc\uc7a5 \uc5c6\uc774 \ub3d9\ub124 \uce74\ud398\uac00 \ud574\uc57c \ud560 \uc5ec\ud560\uc744 \uc81c\ub300\ub85c \ud558\uace0 \uc788\uc5b4\uc694.',
+    '{A} \ub54c\ubb38\uc5d0 \uc654\ub2e4\uac00 \ubaa8\ub4e0 \uac83 \ub54c\ubb38\uc5d0 \uba38\ubb3c\ub800\uc5b4\uc694. {B}\uc5d0\uc11c \uc138\uc2ec\ud55c \ubc30\ub824\uac00 \ub290\uaef4\uc9c0\uace0, \uacf5\uac04 \uc804\uccb4\uc5d0 \uc5ec\uc720\ub85c\uc6c0\uc774 \ub099\uc544 \uc788\uc5b4 \ub22e4\ub978 \uace3\uc5d0\uc11c \ucc3e\uae30 \ud798\ub4e4\uc5b4\uc694. \uc774 \ub3d9\ub124\uc5d0\uc11c \uac00\uc7a5 \uc88b\uc544\ud558\ub294 \uace3\uc774 \ub429\ub2c8\ub2e4.',
+    '{A}\ub9cc\uc73c\ub85c\ub3c4 \ubc29\ubb38\ud560 \uac00\uce58\uac00 \ucda9\ubd84\ud574\uc694. {B}\uae4c\uc9c0 \uace0\ub824\ud558\uba74 \uc8fc\ubcc0\uc5d0 \uc54c\ub824\uc8fc\uace0 \uc2f6\uc740 \ud2b9\ubcc4\ud55c \uace3\uc774 \ub418\uc8e0. \uc77c\uad00\ub418\uace0, \uc9c4\uc9c0\ud558\uba70, \uc9c4\uc2ec\uc73c\ub85c \ud658\uc601\ubc1b\ub294 \ub290\ub099\uc774\uc5b4\uc694.',
+    'Soul Made\uac00 \uc778\uc0c1\uc801\uc778 \uc774\uc720\ub294 \uc138\uc2ec\ud55c \uc815\uc131 \ub54c\ubb38\uc774\uc5d0\uc694. {A}\uc740 \ud56d\uc0c1 \uae30\ub300\ub97c \ucda9\uc871\ud558\uace0, {B}\uc774 \ub354\ud574\uc838 \uac00\uc2dd \uc5c6\uc774 \uc138\ub828\ub41c \uacbd\ud5d8\uc744 \ub9cc\ub4e4\uc5b4\uc918\uc694. Spadina\uc758 \uc2e0\ub8b0\ud560 \uc218 \uc788\ub294 \ub2e8\uace8 \ucea8\ub808\uc5d0\uc694.',
+    'Soul Made\ub294 \uade0\ud615\uc744 \uc798 \uc78a\uc558\uc5b4\uc694 \u2014 {A}, {B}, \uadf8\ub9ac\uace0 \ubc1c\uac78\uc74c\uc744 \ub290\ub9ac\uac8c \ub9cc\ub4dc\ub294 \uacf5\uac04\uae4c\uc9c0. \uc2a4\uc2a4\ub85c \uc5bc\ub9c8\ub098 \uc88b\uc740\uc9c0 \ub54c\ub4e4\uc9c0 \uc54a\uc544\ub3c4 \uc88b\uc740 \uac8c \ub290\uaef4\uc9c0\ub294 \ucfe0\ud53c\uc88d\uc774\uc5b4\uc694.'
+  ]
+};
 
-/* ─── Config ─── */
+/* ── Config ── */
 var GU = 'https://search.google.com/local/writereview?placeid=ChIJm_vQheU1K4gRm95CQTp9JK8';
 var EM = 'soulmadeca@gmail.com';
-var CD_SECS = 25;   // countdown after Google click
-var EXPIRE_SECS = 1800; // 30 min voucher validity
+var CD_SECS = 25;
+var EXPIRE_SECS = 1800;
 
-/* ─── State ─── */
+/* ── State ── */
 var rating = 0, selKw = [], curRv = '';
 var cdTimer = null, cdLeft = 0, googleOpened = false;
 var voucherToken = null, voucherStart = 0;
 var expireTimer = null;
 
-/* ─── Init UI text ─── */
+/* ── Init UI ── */
 document.getElementById('t-s1h').textContent = T.s1h;
 document.getElementById('t-s1p').innerHTML   = T.s1p;
 document.getElementById('sLbl').textContent  = T.s1lbl;
@@ -240,7 +338,7 @@ document.querySelector('#s2 .back').textContent = T.back;
 document.querySelector('#s3 .back').textContent = T.back;
 document.querySelector('#s4 .back').textContent = T.back;
 
-/* ─── Build keyword chips ─── */
+/* ── Build keyword chips ── */
 var kwGrid = document.getElementById('kwGrid');
 KW.forEach(function(k) {
   var b = document.createElement('button');
@@ -258,7 +356,7 @@ KW.forEach(function(k) {
   kwGrid.appendChild(b);
 });
 
-/* ─── Stars ─── */
+/* ── Stars ── */
 var starBtns = document.querySelectorAll('.star-btn');
 var sLbl = document.getElementById('sLbl');
 var btnOK = document.getElementById('btnOK');
@@ -271,6 +369,7 @@ starBtns.forEach(function(b) {
   b.addEventListener('mouseenter', function() { pst(parseInt(b.getAttribute('data-val'))); });
   b.addEventListener('mouseleave', function() { pst(rating); });
 });
+
 function pst(n) {
   starBtns.forEach(function(b) { b.classList.toggle('lit', parseInt(b.getAttribute('data-val')) <= n); });
 }
@@ -289,14 +388,15 @@ function onConfirm() {
   }
 }
 
-/* ─── Generate review ─── */
+/* ── Generate review (language-aware) ── */
 function genReview() {
   if (!selKw.length) selKw = ['vibe', 'staff'];
   var picks = selKw.map(function(id) {
     var found = KW.filter(function(k) { return k.id === id; })[0];
     return found ? found.rv : id;
   });
-  var tpl = TPLS[Math.floor(Math.random() * TPLS.length)];
+  var tpls = TPLS[lang] || TPLS.en;
+  var tpl = tpls[Math.floor(Math.random() * tpls.length)];
   curRv = tpl.replace('{A}', picks[0]).replace('{B}', picks[1] || picks[0]).replace('{C}', picks[2] || picks[0]);
 
   document.getElementById('rvTxt').textContent = curRv;
@@ -314,7 +414,7 @@ function genReview() {
   go('s3');
 }
 
-/* ─── Copy review ─── */
+/* ── Copy ── */
 function cpRv() {
   if (!curRv) return;
   function ok() {
@@ -329,7 +429,7 @@ function cpRv() {
   }
 }
 
-/* ─── Google click + countdown ─── */
+/* ── Google + countdown ── */
 function onGoogle() {
   window.open(GU, '_blank');
   if (googleOpened) return;
@@ -356,16 +456,15 @@ function onGoogle() {
 }
 
 function updCD() {
-  var pct = (cdLeft / CD_SECS * 100) + '%';
-  document.getElementById('cdBar').style.width = pct;
-  document.getElementById('cdTxt').textContent =
-    T.s3cdTpl.replace('{s}', cdLeft);
+  document.getElementById('cdBar').style.width = (cdLeft / CD_SECS * 100) + '%';
+  document.getElementById('cdTxt').textContent = T.s3cdTpl.replace('{s}', cdLeft);
 }
 
+/* ── Sad path ── */
 function subFb() {
   var tx = document.getElementById('fbTxt').value.trim();
   if (!tx) { document.getElementById('fbTxt').style.borderColor = 'var(--rust)'; return; }
-  var sj = encodeURIComponent('[DT \u5e97\u53cd\u9988] \u8bc4\u5206 ' + rating + '\u2605 \u00b7 ' + new Date().toLocaleDateString());
+  var sj = encodeURIComponent('[DT \u5e97\u53cf\u9988] \u8bc4\u5206 ' + rating + '\u2605 \u00b7 ' + new Date().toLocaleDateString());
   var bd = encodeURIComponent('\u5ba2\u4eba\u8bc4\u5206\uff1a' + rating + ' / 5\n\n\u610f\u89c1\uff1a\n' + tx + '\n\n\u6765\u6e90\uff1a\u6536\u636e\u626b\u7801\u95ee\u5377 \u00b7 ' + new Date().toLocaleString());
   window.location.href = 'mailto:' + EM + '?subject=' + sj + '&body=' + bd;
   setTimeout(function() {
@@ -375,36 +474,46 @@ function subFb() {
   }, 800);
 }
 
+/* ── Redemption ── */
 function showRdm5() {
   var key = 'sm_used_' + voucherToken;
   if (localStorage.getItem(key)) { showUsed(); return; }
-    var expireAt = new Date(voucherStart + EXPIRE_SECS * 1000);
-  var hhim = expireAt.getHours().toString().padStart(2,'0') + ':' + expireAt.getMinutes().toString().padStart(2,'0');
-  var snippet = curRv.length > 120 ? curRv.slice(0, 117) + '\u2026' : curRv;
+  var expAt = new Date(voucherStart + EXPIRE_SECS * 1000);
+  var hhmm = expAt.getHours().toString().padStart(2,'0') + ':' + expAt.getMinutes().toString().padStart(2,'0');
+  var snip = curRv.length > 120 ? curRv.slice(0, 117) + '\u2026' : curRv;
   document.getElementById('rdmBody').innerHTML =
-    '<div class="rdm-wrap"><div class="rdm-emoji">&#x1F361;</div><div class="rdm-title">' + T.rdmTitle + '</div><div class="rdm-sub">' + T.rdmSub + '</div><div class="rdm-rv">&ldquo;' + snippet + '&rdquo;</div><div class="rdm-badge">' + T.rdmBadge + '</div><div class="expire-row">' + T.expireLabel + hhim + ' &nbsp;<span class="expire-live" id="expLive"></span></div></div>';
+    '<div class="rdm-wrap"><div class="rdm-emoji">&#x1F361;</div>' +
+    '<div class="rdm-title">' + T.rdmTitle + '</div>' +
+    '<div class="rdm-sub">' + T.rdmSub + '</div>' +
+    '<div class="rdm-rv">&ldquo;' + snip + '&rdquo;</div>' +
+    '<div class="rdm-badge">' + T.rdmBadge + '</div>' +
+    '<div class="expire-row">' + T.expireLabel + hhmm + ' &nbsp;<span class="expire-live" id="expLive"></span></div></div>';
   document.getElementById('stfBtn').textContent = T.stfBtn;
   document.getElementById('stfBtn').className = 'btn btn-sage';
   document.getElementById('stfBtn').style.pointerEvents = '';
   document.getElementById('stfNote').textContent = T.stfNote;
-  go('s5'); startExpireCountdown(key);
+  go('s5'); startExpire(key);
 }
 
 function showRdmSad() {
   var key = 'sm_used_' + voucherToken;
   if (localStorage.getItem(key)) { showUsed(); return; }
-    var expireAt = new Date(voucherStart + EXPIRE_SECS * 1000);
-  var hhim = expireAt.getHours().toString().padStart(2,'0') + ':' + expireAt.getMinutes().toString().padStart(2,'0');
+  var expAt = new Date(voucherStart + EXPIRE_SECS * 1000);
+  var hhmm = expAt.getHours().toString().padStart(2,'0') + ':' + expAt.getMinutes().toString().padStart(2,'0');
   document.getElementById('rdmBody').innerHTML =
-    '<div class="rdm-wrap"><div class="rdm-emoji">&#x1F361;</div><div class="rdm-title">' + T.rdmSadTitle + '</div><div class="rdm-sub">' + T.rdmSadSub + '</div><div class="rdm-badge">' + T.rdmBadge + '</div><div class="expire-row">' + T.expireLabel + hhim + ' &nbsp;<span class="expire-live" id="expLive"></span></div></div>';
+    '<div class="rdm-wrap"><div class="rdm-emoji">&#x1F361;</div>' +
+    '<div class="rdm-title">' + T.rdmSadTitle + '</div>' +
+    '<div class="rdm-sub">' + T.rdmSadSub + '</div>' +
+    '<div class="rdm-badge">' + T.rdmBadge + '</div>' +
+    '<div class="expire-row">' + T.expireLabel + hhmm + ' &nbsp;<span class="expire-live" id="expLive"></span></div></div>';
   document.getElementById('stfBtn').textContent = T.stfBtn;
   document.getElementById('stfBtn').className = 'btn btn-sage';
   document.getElementById('stfBtn').style.pointerEvents = '';
   document.getElementById('stfNote').textContent = T.stfNote;
-  go('s5'); startExpireCountdown(key);
+  go('s5'); startExpire(key);
 }
 
-function startExpireCountdown(key) {
+function startExpire(key) {
   clearInterval(expireTimer);
   expireTimer = setInterval(function() {
     var left = Math.floor((voucherStart + EXPIRE_SECS * 1000 - Date.now()) / 1000);
